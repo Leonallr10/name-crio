@@ -3,13 +3,20 @@ document.getElementById('nameForm').addEventListener('submit', function(event) {
 
   const firstName = document.getElementById('firstName').value.trim();
   const lastName = document.getElementById('lastName').value.trim();
+  const outputContainer = document.getElementById('outputContainer');
 
-  const output = document.getElementById('fullNameOutput');
+  // Remove previous output if exists
+  const existingOutput = document.getElementById('fullNameOutput');
+  if (existingOutput) {
+    outputContainer.removeChild(existingOutput);
+  }
 
+  // If both fields are filled, show full name
   if (firstName && lastName) {
+    const output = document.createElement('div');
+    output.id = 'fullNameOutput';
+    output.className = 'output';
     output.textContent = `Full Name: ${firstName} ${lastName}`;
-    output.style.display = 'block';
-  } else {
-    output.style.display = 'none'; // Hide output on invalid input
+    outputContainer.appendChild(output);
   }
 });
