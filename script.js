@@ -1,18 +1,21 @@
 document.getElementById('nameForm').addEventListener('submit', function(event) {
-  event.preventDefault(); // keep page from reloading
+  event.preventDefault(); // prevent page reload
 
   const firstName = document.getElementById('firstName').value.trim();
   const lastName  = document.getElementById('lastName').value.trim();
-  const outputEl  = document.getElementById('fullNameOutput');
+  let outputEl    = document.getElementById('fullNameOutput');
 
-  // BOTH fields filled?
+  // Remove the div if it exists (first)
+  if (outputEl) {
+    outputEl.remove();
+  }
+
+  // Only create and append if both fields are filled
   if (firstName && lastName) {
-    // just update the existing div
+    outputEl = document.createElement('div');
+    outputEl.className = 'output';
+    outputEl.id = 'fullNameOutput';
     outputEl.textContent = `Full Name: ${firstName} ${lastName}`;
-  } else {
-    // remove it from the DOM so Cypress .should('not.exist') passes
-    if (outputEl) {
-      outputEl.remove();
-    }
+    document.body.appendChild(outputEl);
   }
 });
