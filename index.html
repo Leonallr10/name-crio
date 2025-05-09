@@ -25,6 +25,9 @@
     <button type="submit">Submit</button>
   </form>
 
+  <!-- Initial placeholder that Cypress looks for -->
+  <div class="output" id="fullNameOutput">Full Name Display</div>
+
   <script>
     document.getElementById('nameForm').addEventListener('submit', function(event) {
       event.preventDefault(); // prevent page reload
