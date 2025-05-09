@@ -1,22 +1,18 @@
 document.getElementById('nameForm').addEventListener('submit', function(event) {
-  event.preventDefault();
+  event.preventDefault(); // keep page from reloading
 
   const firstName = document.getElementById('firstName').value.trim();
-  const lastName = document.getElementById('lastName').value.trim();
-  const outputContainer = document.getElementById('outputContainer');
+  const lastName  = document.getElementById('lastName').value.trim();
+  const outputEl  = document.getElementById('fullNameOutput');
 
-  // Remove previous output if exists
-  const existingOutput = document.getElementById('fullNameOutput');
-  if (existingOutput) {
-    outputContainer.removeChild(existingOutput);
-  }
-
-  // If both fields are filled, show full name
+  // BOTH fields filled?
   if (firstName && lastName) {
-    const output = document.createElement('div');
-    output.id = 'fullNameOutput';
-    output.className = 'output';
-    output.textContent = `Full Name: ${firstName} ${lastName}`;
-    outputContainer.appendChild(output);
+    // just update the existing div
+    outputEl.textContent = `Full Name: ${firstName} ${lastName}`;
+  } else {
+    // remove it from the DOM so Cypress .should('not.exist') passes
+    if (outputEl) {
+      outputEl.remove();
+    }
   }
 });
